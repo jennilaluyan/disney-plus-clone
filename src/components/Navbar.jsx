@@ -1,0 +1,56 @@
+import DisneyLogo from '../assets/images/logo.svg'
+import Home from '../assets/images/home-icon.svg'
+import Search from '../assets/images/search-icon.svg'
+import Watchlist from '../assets/images/watchlist-icon.svg'
+import Originals from '../assets/images/original-icon.svg'
+import Movies from '../assets/images/movie-icon.svg'
+import Series from '../assets/images/series-icon.svg'
+
+import { auth, provider } from "../firebase";
+import { signInWithPopup } from "firebase/auth";
+
+export const Navbar = () => {
+
+    const handleAuth = () => {
+        signInWithPopup(auth, provider)
+            .then(result => console.log(result))
+            .catch(error => alert(error.message));
+    };
+
+    return (
+        <>
+            <nav className='fixed h-24 w-screen flex items-center justify-between py-4 px-12 bg-[#040714] z-20'>
+                <div className='flex items-center w-full gap-12'>
+                    <img src={DisneyLogo} alt="Disney Logo" className='w-28' />
+                    {/* <div className='hidden list-none md:flex flex-row gap-7 uppercase tracking-wider'>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Home} alt="Home logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Home<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Search} alt="Search logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Search<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Watchlist} alt="Watchlist logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Watchlist<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Originals} alt="Originals logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Originals<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Movies} alt="Movies logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Movies<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                        <a className='flex flex-row gap-2'>
+                            <img src={Series} alt="Series logo" className='flex justify-center w-6' />
+                            <div className='relative inline-block pb-1 group'>Series<span className='absolute left-0 -bottom-1 w-0 h-[2px] bg-blue-500 transition-all duration-250 group-hover:w-full'></span></div>
+                        </a>
+                    </div> */}
+                </div>
+                <button className="max-w-32 min-w-1 w-full bg-gradient-to-r from-[#2555d8] to-[#112993] font-semibold py-1 rounded-md text-lg flex justify-center gap-2 transition-transform duration-800 ease-in-out hover:scale-103">Log In</button>
+            </nav>
+        </>
+    )
+}
