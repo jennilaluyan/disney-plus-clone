@@ -19,6 +19,7 @@ export const Navbar = () => {
     const userName = useSelector(selectUserName);
     const userPhoto = useSelector(selectUserPhoto);
     const userEmail = useSelector(selectUserEmail);
+    const navigate = useNavigate();
 
     useEffect(() => {
         auth.onAuthStateChanged(async (user) => {
@@ -38,10 +39,17 @@ export const Navbar = () => {
     };
 
     const handleAuth = () => {
-        signInWithPopup(auth, provider)
-            .then(result => setUser(result.user))
-            .catch(error => alert(error.message));
-    };
+        if (!userName) {
+            signInWithPopup(auth, provider)
+                .then(result => setUser(result.user))
+                .catch(error => alert(error.message));
+        } else if (userName) {
+            auth.signOut().then(() => {
+                dispatch(setSignOutState());
+                navigate('/');
+            }).catch((err) => alert(err.message));
+        }
+    }
 
     return (
         <>
@@ -84,7 +92,12 @@ export const Navbar = () => {
                                         </a>
                                     </div>
                                 </div>
-                                <img src={userPhoto} alt={userName} className='max-w-20 w-full' />
+                                <div className='group'>
+                                    <img src={userPhoto} alt={userName} className='max-w-14 rounded-full w-full' />
+                                    <div className="absolute top-19 right-16 border bg-[#090a0f] p-2 rounded-sm border-gray-700 tracking-widest text-sm opacity-0 scale-95 pointer-events-none transition-all duration-300 ease-out group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto">
+                                        <span onClick={handleAuth}>Log Out</span>
+                                    </div>
+                                </div>
                             </div>
                         </>
                 }
