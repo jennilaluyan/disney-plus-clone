@@ -1,13 +1,10 @@
 import DisneyPlusLogo from "../assets/images/logo.svg"
-import CTALogoTwo from "../assets/images/cta-logo-two.png"
 import Background from "../assets/images/login-background.jpg"
-import { Navbar } from "./Navbar"
 import { ChevronRight } from "lucide-react"
 
 export const Onboarding = () => {
     return (
         <section className="h-screen">
-            <Navbar />
             <div className="relative overflow-hidden flex h-full justify-center items-end mb-32 box-border">
                 <img src={Background} alt="" className="absolute object-cover w-full h-full object-top top-0 right-0 left-0 -z-1" />
                 <main className="text-center max-w-[650px] w-full flex flex-col mx-8 mb-24">
